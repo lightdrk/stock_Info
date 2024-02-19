@@ -10,20 +10,24 @@ from helper.scrap_trend import Scrap
 
 def store_data():
     ''' for creating and storing credentails'''
-    print(f"***** env *****")
-    username = input('Username: ')
-    token = input('Token: ')
-    repo = input('Repository: ')
-    print("**** file path ****")
-    client = input('Client location: ')
-    with open('./creds/.env', 'w') as env:
-        env.write(f'USERNAME={username}\n')
-        env.write(f'TOKEN={token}\n')
-        env.write(f'REPO={repo}\n')
+    print(Fore.BLUE+f"***** env *****")
+    if not os.path.exists('creds/.env'):
+        username = input('Username: ')
+        token = input('Token: ')
+        repo = input('Repository: ')
+        with open('./creds/.env', 'w') as env:
+            env.write(f'USERNAME={username}\n')
+            env.write(f'TOKEN={token}\n')
+            env.write(f'REPO={repo}\n')
+    print(Fore.GREEN+'=>valid')
 
-    if os.path.exists(client):
-        os.rename(client, './creds/client_secret.json')
-
+    print(Fore.BLUE+"**** file path ****")
+    if not os.path.exists('creds/client_secret.json'):
+        client = input(Fore.GREEN+'Client cred (path): ')
+        if os.path.exists(client):
+            os.rename(client, './creds/client_secret.json')
+        else:
+            print(Fore.RED+'path issue')
     print(Fore.GREEN+'Updated')
     print(Fore.WHITE)
 
@@ -86,7 +90,8 @@ if __name__ == "__main__":
         store_data()
 
     if not (os.path.exists('creds/client_secret.json') and os.path.exists('creds/.env')):
-        sys.exit(Fore.RED+'Suggested : use new for creds generation',Fore.WHITE)
+        print(Fore.RED+'Suggested : use main.py --new for creds generation',Fore.WHITE+'\n use --help')
+        sys.exit()
     main()
 
 
