@@ -1,4 +1,5 @@
 import os
+import sys
 import argparse
 from colorama import Fore
 from dotenv import load_dotenv
@@ -18,7 +19,7 @@ def store_data():
     with open('./creds/.env', 'w') as env:
         env.write(f'USERNAME={username}\n')
         env.write(f'TOKEN={token}\n')
-        env.write(f'Repository={repo}\n')
+        env.write(f'REPO={repo}\n')
 
     if os.path.exists(client):
         os.rename(client, './creds/client_secret.json')
@@ -78,12 +79,15 @@ if __name__ == "__main__":
     2. --new | -n
     '''
     parser = argparse.ArgumentParser(prog="", usage=usage)
-    parser.add_argument("new", nargs="?", help="Example: main.py -n|--new ")
+    parser.add_argument("--new",action='store_true', help="Example: main.py -n|--new ")
     args = parser.parse_args()
 
     if args.new:
         store_data()
-    #main()
+
+    if not (os.path.exists('creds/client_secret.json') and os.path.exists('creds/.env')):
+        sys.exit(Fore.RED+'Suggested : use new for creds generation',Fore.WHITE)
+    main()
 
 
 #TODO: gui ? / getting details
