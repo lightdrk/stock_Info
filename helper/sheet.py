@@ -60,7 +60,7 @@ class GSheet:
 
         '''
         id_ = sheet_id or self.id
-        print(f'__+__+__+__{id_}_+__+__+__')
+        #print(f'__+__+__+__{id_}_+__+__+__')
         try:
             self.open = self.gc.open_by_key(id_)
         except Exception as err:
@@ -147,8 +147,8 @@ def g_sheet(data):
 
         with open('client_secret.json', 'r') as fs:
             creds = json.loads(fs.read())
-        print(authorized_user)
-        print(creds)
+        #print(authorized_user)
+        #print(creds)
         gc, authorized_user = gspread.oauth_from_dict(creds, authorized_user)
 
     except :
@@ -160,7 +160,7 @@ def g_sheet(data):
 
     sh = gc.open_by_key('1PKDskq94WwKit6KmVFyop1fZ2yi0eHQoAVYOg7k6JpI')
     worksheet = sh.get_worksheet(0)
-    print(worksheet.acell('A1').value)
+    #print(worksheet.acell('A1').value)
     worksheet.update_cell(1,2, 'bingo')
 """
 
