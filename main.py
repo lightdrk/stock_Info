@@ -10,11 +10,13 @@ from helper.scrap_trend import Scrap
 
 def store_data():
     ''' for creating and storing credentails'''
-    print(Fore.BLUE+f"***** env *****")
+    print(Fore.BLUE+f"***** env *****",Fore.GREEN)
     if not os.path.exists('creds/.env'):
-        username = input('Username: ')
-        token = input('Token: ')
-        repo = input('Repository: ')
+        username = input(Fore.CYAN+'Username: '+Fore.GREEN)
+        token = input(Fore.CYAN+'Token: '+Fore.GREEN)
+        repo = input(Fore.CYAN+'Repository: '+Fore.GREEN)
+        if not os.path.exists('creds'):
+            os.mkdir('creds')
         with open('./creds/.env', 'w') as env:
             env.write(f'USERNAME={username}\n')
             env.write(f'TOKEN={token}\n')
@@ -26,9 +28,9 @@ def store_data():
         client = input(Fore.GREEN+'Client cred (path): ')
         if os.path.exists(client):
             os.rename(client, './creds/client_secret.json')
+            print(Fore.GREEN+'Updated')
         else:
             print(Fore.RED+'path issue')
-    print(Fore.GREEN+'Updated')
     print(Fore.WHITE)
 
 
@@ -95,4 +97,3 @@ if __name__ == "__main__":
     main()
 
 
-#TODO: gui ? / getting details
