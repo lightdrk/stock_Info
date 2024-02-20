@@ -107,6 +107,7 @@ class GSheet:
         ''' update cell with text'''
         try:
             self.enter_worksheet.update_acell(f"{cell_number}", f"{data}")
+            self.enter_worksheet.format(f'{cell_number}',{'textFormat': { 'bold': True }, 'backgroundColor': {"red": 0.0, "green": 1.0, "blue": 0.0}, 'verticalAlignment': 'MIDDLE'})
         except Exception as err:
             print(f"error in updating cell with data : {err}")
 
