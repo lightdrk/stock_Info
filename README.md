@@ -49,7 +49,7 @@ To use this project, you will need to obtain credentials for the following servi
     4. Create credentials for a service account.
     5. Download the JSON file containing your credentials.
  
-  - **Spread Sheet**: you need id of the spread sheet from the link.
+- **Spread Sheet**: you need id of the spread sheet from the link.
     
     1. Go to the spread sheet
     2. Copy '1PKDskq94WwKit6KmVFyop1fZ2yi0eHQoAVYOg7k6JpI' from the url "https://docs.google.com/spreadsheets/d/1PKDskq94WwKit6KmVFyop1fZ2yi0eHQoAVYOg7k6JpI/edit#gid=0"
