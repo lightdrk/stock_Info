@@ -1,13 +1,3 @@
-# stock_Info
-Using spread sheet api to update stock data ,with imgaes
-
-requirements ->
-spreadsheet id 
-github token 
-.env
-client creds google
-# Project Name README
-
 ## Overview
 
 This project is designed to [brief description of the project].
@@ -63,17 +53,9 @@ To use this project, you will need to obtain credentials for the following servi
 
 Once you have obtained the necessary credentials, follow these steps:
 
-1. Create a directory named `creds` in the project root.
-
-2. Place the GitHub token in a file named `.env` inside the `creds` directory. The file should have the following format:
-
-    ```
-    USERNAME=your_github_username
-    TOKEN=your_github_token
-    REPO=your_repository_name
-    ```
-
-3. Place the Google Sheets credentials JSON file in the `creds` directory with the name `client_secret.json`.
+1. Create a directory named `creds` in the project root if not seen/avilable .
+2. ```bash
+   python main.py --new
 
 ## Usage
 
