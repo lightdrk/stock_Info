@@ -40,6 +40,7 @@ To use this project, you will need to obtain credentials for the following servi
     3. In the left sidebar, click on **Developer settings** and then **Personal access tokens**.
     4. Generate a new token with the necessary permissions (typically, repo access is needed).
     5. Copy the generated token.
+    6. Create a repo where images will be stored.
 
 - **Google Sheets**: You need credentials for Google Sheets API.
 
