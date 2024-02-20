@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 import argparse
 from colorama import Fore
 from dotenv import load_dotenv
@@ -15,12 +16,14 @@ def store_data():
         username = input(Fore.CYAN+'Username: '+Fore.GREEN)
         token = input(Fore.CYAN+'Token: '+Fore.GREEN)
         repo = input(Fore.CYAN+'Repository: '+Fore.GREEN)
+        sheet = input(Fore.CYAN+'Sheet: '+Fore.GREEN)
         if not os.path.exists('creds'):
             os.mkdir('creds')
         with open('./creds/.env', 'w') as env:
             env.write(f'USERNAME={username}\n')
             env.write(f'TOKEN={token}\n')
             env.write(f'REPO={repo}\n')
+            env.write(f'SHEET={sheet}')
     print(Fore.GREEN+'=>valid')
 
     print(Fore.BLUE+"**** file path ****")
@@ -42,13 +45,14 @@ def main():
     username = os.getenv('USERNAME')
     token = os.getenv('TOKEN')
     repo_name = os.getenv('REPO')
+    sheet = os.getenv('SHEET')
     google_sheet = GSheet()
     scraper_object = Scrap()
     github = Github(username=username, token=token, repo_name=repo_name)
     #gets access for drive
     #google_sheet.explicity_new_auth()
     google_sheet.auth_user() #authenticate the user
-    google_sheet.open_google_sheet(sheet_id="1PKDskq94WwKit6KmVFyop1fZ2yi0eHQoAVYOg7k6JpI")
+    google_sheet.open_google_sheet(sheet_id=sheet)
     scrap_names = google_sheet.fetch_name(worksheet=0,column=1)
     print(scrap_names)
     data_pass_google_sheet = [] # list of retived data
@@ -89,11 +93,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.new:
+        if os.path.exists('creds/.env') and os.path.exists('creds/client_secret.json'):
+            confirm = input(Fore.WHITE+'Do you want to re-create[yes/no](Default : no): ')
+            if confirm.casefold() == 'yes':
+                shutil.rmtree('creds')
         store_data()
 
     if not (os.path.exists('creds/client_secret.json') and os.path.exists('creds/.env')):
         print(Fore.RED+'Suggested : use main.py --new for creds generation',Fore.WHITE+'\n use --help')
         sys.exit()
-    main()
+    if os.path.exists('creds/.env') and os.path.exists('creds/client_secret.json'):
+        main()
 
 
