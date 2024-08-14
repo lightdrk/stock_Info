@@ -1,6 +1,6 @@
 ## Overview
 
-This project is designed to [brief description of the project].
+This project is designed to scrape data and image from trendly and insert it in google sheets.
 
 ## Prerequisites
 
